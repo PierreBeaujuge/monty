@@ -62,6 +62,7 @@ void (*get_opcode_func(char *s))(stack_t **stack, unsigned int line_number)
 			return (opc[i].f);
 		i++;
 	}
+	exit_check = 1;
 	return (NULL);
 }
 

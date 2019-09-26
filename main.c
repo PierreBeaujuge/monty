@@ -24,10 +24,7 @@ int main(int argc, char **argv)
 	file = argv[1];
 	fp = fopen(file, "r");
 	if (fp == NULL)
-	{
-		dprintf(2, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+		dprintf(2, "Error: Can't open file %s\n", argv[1]), exit(EXIT_FAILURE);
 	while (getline(&buf, &bufsize, fp) != -1)
 	{
 		token = strtok(buf, " \t\n");
@@ -47,7 +44,11 @@ int main(int argc, char **argv)
 		ptr = get_opcode_func(array[0]);
 		if (ptr != NULL)
 			(*ptr)(&head, line_number);
-		exit_failure_check(buf, fp, head);
+		else
+		{
+			dprintf(2, "L%i: unknown instruction %s\n", (int)line_number, array[0]);
+			exit_failure_check(buf, fp, head);
+		}
 		line_number++;
 	}
 	free(buf), fclose(fp), free_stackt(head);
