@@ -69,7 +69,7 @@ void pstr_(stack_t **head, unsigned int line_number)
 	if (*head)
 	{
 		temp = *head;
-		while (temp != NULL && temp->n != 0 && temp->n <= 127 && temp->n >= 0)
+		while (temp != NULL && (temp->n) != 0 && (temp->n) <= 127 && (temp->n) >= 33)
 		{
 			printf("%c", (char)(temp->n));
 			temp = temp->next;
