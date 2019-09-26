@@ -82,6 +82,8 @@ int isnumber(char *str, unsigned int line_number)
 		dprintf(2, "L%i: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	if (str[0] == '-')
+		i = 1;
 	for (; str[i] != '\0'; i++)
 		if (!isdigit(str[i]))
 		{
