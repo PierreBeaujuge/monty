@@ -2,6 +2,11 @@
 #define MONTY_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+extern int num;
+extern int data_format;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -32,5 +37,28 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+void free_stackt(stack_t *head);
+void (*get_opcode_func(char *s))(stack_t **stack, unsigned int line_number);
+int isnumber(char *str, unsigned int line_number);
+int iscomment(char *str);
+void push_(stack_t **head, unsigned int line_number);
+void pall_(stack_t **head, unsigned int line_number);
+void pint_(stack_t **head, unsigned int line_number);
+void pop_(stack_t **head, unsigned int line_number);
+void swap_(stack_t **head, unsigned int line_number);
+void add_(stack_t **head, unsigned int line_number);
+void sub_(stack_t **head, unsigned int line_number);
+void nop_(stack_t **head, unsigned int line_number);
+void sub_(stack_t **head, unsigned int line_number);
+void div_(stack_t **head, unsigned int line_number);
+void mul_(stack_t **head, unsigned int line_number);
+void mod_(stack_t **head, unsigned int line_number);
+void pchar_(stack_t **head, unsigned int line_number);
+void pstr_(stack_t **head, unsigned int line_number);
+void rotl_(stack_t **head, unsigned int line_number);
+void rotr_(stack_t **head, unsigned int line_number);
+void stack_(stack_t **head, unsigned int line_number);
+void queue_(stack_t **head, unsigned int line_number);
 
 #endif
