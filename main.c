@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	fp = fopen(file, "r");
 	if (fp == NULL)
 	{
-		dprintf(2, "Error: Can't open file %s\n", argv[0]);
+		dprintf(2, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (getline(&buf, &bufsize, fp) != -1)
