@@ -70,7 +70,7 @@ void (*get_opcode_func(char *s))(stack_t **stack, unsigned int line_number)
  * and converts the string to an integer if all characters are digits
  * @str: string passed from main (string pointed to by array[1])
  * @line_number: index of the bytecode line where function is called
- * Return: n, integer to be stored as global variable
+ * Return: n, integer to be stored as global variable, -1 if not integer
  */
 
 int isnumber(char *str, unsigned int line_number)
@@ -81,6 +81,7 @@ int isnumber(char *str, unsigned int line_number)
 	{
 		dprintf(2, "L%i: usage: push integer\n", line_number);
 		exit_check = 1;
+		return (-1);
 	}
 	if (str[0] == '-')
 		i = 1;
@@ -89,6 +90,7 @@ int isnumber(char *str, unsigned int line_number)
 		{
 			dprintf(2, "L%i: usage: push integer\n", line_number);
 			exit_check = 1;
+			return (-1);
 		}
 	n = atoi(str);
 	return (n);
@@ -111,7 +113,7 @@ int iscomment(char *str)
 }
 
 /**
- * exit_failure - function that frees and close(fp) before exiting
+ * exit_failure_check - function that frees and close(fp) before exiting
  * @buf: buffer created by getline for each line being read from file
  * @fp: pointer returned by fopen function
  * @head: pointer to head node passed from main
@@ -122,9 +124,9 @@ void exit_failure_check(char *buf, FILE *fp, stack_t *head)
 {
 	if (exit_check == 1)
 	{
-	free(buf);
-	fclose(fp);
-	free_stackt(head);
-	exit(EXIT_FAILURE);
+		free(buf);
+		fclose(fp);
+		free_stackt(head);
+		exit(EXIT_FAILURE);
 	}
 }
