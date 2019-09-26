@@ -37,10 +37,17 @@ void mod_(stack_t **head, unsigned int line_number)
 
 void pchar_(stack_t **head, unsigned int line_number)
 {
-	if (!*head || (*head)->n > 127 || (*head)->n < 0)
+	if (!(*head))
 	{
 		dprintf(2, "L%i: can't pchar, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_check = 1;
+		return;
+	}
+	if ((*head)->n > 127 || (*head)->n < 0)
+	{
+		dprintf(2, "L%i: can't pchar, value out of range\n", line_number);
+		exit_check = 1;
+		return;
 	}
 	printf("%c\n", (char)((*head)->n));
 }
