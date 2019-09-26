@@ -82,7 +82,8 @@ void pint_(stack_t **head, unsigned int line_number)
 	if (!*head)
 	{
 		dprintf(2, "L%i: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_check = 1;
+		return;
 	}
 	printf("%i\n", (*head)->n);
 }
@@ -101,7 +102,8 @@ void pop_(stack_t **head, unsigned int line_number)
 	if (!*head)
 	{
 		dprintf(2, "L%i: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_check = 1;
+		return;
 	}
 	temp = *head;
 	*head = (*head)->next;
@@ -127,7 +129,8 @@ void swap_(stack_t **head, unsigned int line_number)
 	if (!((*head)->next))
 	{
 		dprintf(2, "L%i: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_check = 1;
+		return;
 	}
 	temp = (*head)->next;
 	(*head)->next = temp->next;
