@@ -2,6 +2,7 @@
 
 int num = 0;
 int data_format = 0;
+int exit_check = 0;
 
 /**
  * main - interpreter for Monty ByteCodes files
@@ -19,10 +20,7 @@ int main(int argc, char **argv)
 	stack_t *head = NULL;
 
 	if (argc != 2)
-	{
-		dprintf(2, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		dprintf(2, "USAGE: monty file\n"), exit(EXIT_FAILURE);
 	file = argv[1];
 	fp = fopen(file, "r");
 	if (fp == NULL)
@@ -43,11 +41,13 @@ int main(int argc, char **argv)
 		{
 			token = strtok(NULL, " \t\n");
 			array[1] = token;
-			num = isnumber(array[1], line_number, buf, fp, head);
+			num = isnumber(array[1], line_number);
+			exit_failure_check(buf, fp, head);
 		}
 		ptr = get_opcode_func(array[0]);
 		if (ptr != NULL)
 			(*ptr)(&head, line_number);
+		exit_failure_check(buf, fp, head);
 		line_number++;
 	}
 	free(buf), fclose(fp), free_stackt(head);

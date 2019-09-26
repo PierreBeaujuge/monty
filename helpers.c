@@ -73,14 +73,14 @@ void (*get_opcode_func(char *s))(stack_t **stack, unsigned int line_number)
  * Return: n, integer to be stored as global variable
  */
 
-int isnumber(char *str, unsigned int line_number, char *buf, FILE *fp, stack_t *head)
+int isnumber(char *str, unsigned int line_number)
 {
 	int i = 0, n = 0;
 
 	if (!str)
 	{
 		dprintf(2, "L%i: usage: push integer\n", line_number);
-		exit_failure(buf, fp, head);
+		exit_check = 1;
 	}
 	if (str[0] == '-')
 		i = 1;
@@ -88,7 +88,7 @@ int isnumber(char *str, unsigned int line_number, char *buf, FILE *fp, stack_t *
 		if (!isdigit(str[i]))
 		{
 			dprintf(2, "L%i: usage: push integer\n", line_number);
-			exit_failure(buf, fp, head);
+			exit_check = 1;
 		}
 	n = atoi(str);
 	return (n);
@@ -118,10 +118,13 @@ int iscomment(char *str)
  * Return: void
  */
 
-void exit_failure(char *buf, FILE *fp, stack_t *head)
+void exit_failure_check(char *buf, FILE *fp, stack_t *head)
 {
+	if (exit_check == 1)
+	{
 	free(buf);
 	fclose(fp);
 	free_stackt(head);
 	exit(EXIT_FAILURE);
+	}
 }
