@@ -16,12 +16,14 @@ void mod_(stack_t **head, unsigned int line_number)
 	if (!(*head) || !((*head)->next))
 	{
 		dprintf(2, "L%i: can't mod, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_check = 1;
+		return;
 	}
 	if ((*head)->n == 0)
 	{
 		dprintf(2, "L%i: division by zero\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_check = 1;
+		return;
 	}
 	temp = (*head)->next;
 	temp->n %= (*head)->n;
