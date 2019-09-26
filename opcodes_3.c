@@ -92,7 +92,7 @@ void rotl_(stack_t **head, unsigned int line_number)
 	stack_t *temp = NULL;
 
 	(void)line_number;
-	if (!((*head)->next))
+	if (!(*head) || !((*head)->next))
 		return;
 	temp = *head;
 	while (temp->next != NULL)
@@ -116,7 +116,7 @@ void rotr_(stack_t **head, unsigned int line_number)
 	stack_t *temp = NULL;
 
 	(void)line_number;
-	if (!((*head)->next))
+	if (!(*head) || !((*head)->next))
 		return;
 	temp = *head;
 	while (temp->next != NULL)
