@@ -45,10 +45,8 @@ int main(int argc, char **argv)
 		if (ptr != NULL)
 			(*ptr)(&head, line_number);
 		else
-		{
 			dprintf(2, "L%i: unknown instruction %s\n", (int)line_number, array[0]);
-			exit_failure_check(buf, fp, head);
-		}
+		exit_failure_check(buf, fp, head);
 		line_number++;
 	}
 	free(buf), fclose(fp), free_stackt(head);

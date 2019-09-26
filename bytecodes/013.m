@@ -1,2 +1,1 @@
-banana
-pall
+pint
