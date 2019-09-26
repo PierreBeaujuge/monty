@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 		{
 			token = strtok(NULL, " \t\n");
 			array[1] = token;
-			num = isnumber(array[1], line_number);
+			num = isnumber(array[1], line_number, buf, fp, head);
 		}
 		ptr = get_opcode_func(array[0]);
 		if (ptr != NULL)

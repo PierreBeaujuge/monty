@@ -40,8 +40,9 @@ typedef struct instruction_s
 
 void free_stackt(stack_t *head);
 void (*get_opcode_func(char *s))(stack_t **stack, unsigned int line_number);
-int isnumber(char *str, unsigned int line_number);
+int isnumber(char *str, unsigned int line_number, char *buf, FILE *fp, stack_t *head);
 int iscomment(char *str);
+void exit_failure(char *buf, FILE *fp, stack_t *head);
 void push_(stack_t **head, unsigned int line_number);
 void pall_(stack_t **head, unsigned int line_number);
 void pint_(stack_t **head, unsigned int line_number);

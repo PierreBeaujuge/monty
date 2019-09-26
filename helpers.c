@@ -73,14 +73,14 @@ void (*get_opcode_func(char *s))(stack_t **stack, unsigned int line_number)
  * Return: n, integer to be stored as global variable
  */
 
-int isnumber(char *str, unsigned int line_number)
+int isnumber(char *str, unsigned int line_number, char *buf, FILE *fp, stack_t *head)
 {
 	int i = 0, n = 0;
 
 	if (!str)
 	{
 		dprintf(2, "L%i: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(buf, fp, head);
 	}
 	if (str[0] == '-')
 		i = 1;
@@ -88,7 +88,7 @@ int isnumber(char *str, unsigned int line_number)
 		if (!isdigit(str[i]))
 		{
 			dprintf(2, "L%i: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
+			exit_failure(buf, fp, head);
 		}
 	n = atoi(str);
 	return (n);
@@ -108,4 +108,20 @@ int iscomment(char *str)
 	if (*str == '#')
 		return (0);
 	return (1);
+}
+
+/**
+ * exit_failure - function that frees and close(fp) before exiting
+ * @buf: buffer created by getline for each line being read from file
+ * @fp: pointer returned by fopen function
+ * @head: pointer to head node passed from main
+ * Return: void
+ */
+
+void exit_failure(char *buf, FILE *fp, stack_t *head)
+{
+	free(buf);
+	fclose(fp);
+	free_stackt(head);
+	exit(EXIT_FAILURE);
 }
