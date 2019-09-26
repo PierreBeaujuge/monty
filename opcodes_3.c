@@ -13,7 +13,7 @@ void mod_(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp = NULL;
 
-	if (!((*head)->next))
+	if (!(*head) || !((*head)->next))
 	{
 		dprintf(2, "L%i: can't mod, stack too short\n", line_number);
 		exit(EXIT_FAILURE);

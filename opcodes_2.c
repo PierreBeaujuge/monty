@@ -48,7 +48,7 @@ void sub_(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp = NULL;
 
-	if (!((*head)->next))
+	if (!(*head) || !((*head)->next))
 	{
 		dprintf(2, "L%i: can't sub, stack too short\n", line_number);
 		exit_check = 1;
@@ -71,7 +71,7 @@ void div_(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp = NULL;
 
-	if (!((*head)->next))
+	if (!(*head) || !((*head)->next))
 	{
 		dprintf(2, "L%i: can't div, stack too short\n", line_number);
 		exit_check = 1;
@@ -100,7 +100,7 @@ void mul_(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp = NULL;
 
-	if (!((*head)->next))
+	if (!(*head) || !((*head)->next))
 	{
 		dprintf(2, "L%i: can't mul, stack too short\n", line_number);
 		exit_check = 1;
